@@ -5,31 +5,31 @@ namespace CalculadoraTDD
 {
     public class Calculadora
     {
-        private List<string> _historico;
+        private List<Operacao> _historico;
 
         public Calculadora()
         {
-            _historico = new List<string>();
+            _historico = new List<Operacao>();
         }
 
         public int Somar(int a, int b)
         {
             int resultado = a + b;
-            _historico.Add($"{a} + {b} = {resultado}");
+            RegistrarOperacao(a, b, "+", resultado);
             return resultado;
         }
 
         public int Subtrair(int a, int b)
         {
             int resultado = a - b;
-            _historico.Add($"{a} - {b} = {resultado}");
+            RegistrarOperacao(a, b, "-", resultado);
             return resultado;
         }
 
         public int Multiplicar(int a, int b)
         {
             int resultado = a * b;
-            _historico.Add($"{a} * {b} = {resultado}");
+            RegistrarOperacao(a, b, "*", resultado);
             return resultado;
         }
 
@@ -39,13 +39,29 @@ namespace CalculadoraTDD
                 throw new DivideByZeroException("Não é possível dividir por zero.");
 
             int resultado = a / b;
-            _historico.Add($"{a} / {b} = {resultado}");
+            RegistrarOperacao(a, b, "/", resultado);
             return resultado;
+        }
+
+        private void RegistrarOperacao(int a, int b, string operador, int resultado)
+        {
+            _historico.Add(new Operacao
+            {
+                PrimeiroNumero = a,
+                SegundoNumero = b,
+                Operador = operador,
+                Resultado = resultado
+            });
         }
 
         public List<string> Historico()
         {
-            return _historico;
+            var lista = new List<string>();
+            foreach (var op in _historico)
+            {
+                lista.Add(op.ToString());
+            }
+            return lista;
         }
     }
 }

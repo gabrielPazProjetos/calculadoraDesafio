@@ -1,0 +1,3 @@
+dotnet new sln -n CalculadoraTDD
+dotnet sln CalculadoraTDD.sln add CalculadoraTDD/CalculadoraTDD.csproj
+dotnet sln CalculadoraTDD.sln add CalculadoraTDD.Tests/CalculadoraTDD.Tests.csproj
